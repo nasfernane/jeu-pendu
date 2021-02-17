@@ -1,7 +1,8 @@
 <?php
 
 // déclaration des variables
-$wordToGuess = "topinambour";
+$dictionnary = file("data.txt");
+$wordToGuess = $dictionnary[rand(0, count($dictionnary))];
 $guessingProgress = preg_replace('#[a-zA-Z]#', '_', str_split($wordToGuess));
 $previousGuess = [];
 $tryLeft = 5;
@@ -12,7 +13,7 @@ while (implode($guessingProgress) !== $wordToGuess) {
 
     // Si le compteur d'essais restants est à 0, exit le jeu avec un message
     if ($tryLeft == 0) {
-        exit("💥 Tu as perdu... Tu n'es vraiment pas doué à ce jeu. 💥");
+        exit("💥 Perdu... Il fallait trouver le mot $wordToGuess ! Tu n'es vraiment pas doué à ce jeu. 💥");
     }
 
     // affiche la progression et les précédentes recherches
